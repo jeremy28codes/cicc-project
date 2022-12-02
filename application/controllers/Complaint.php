@@ -382,12 +382,11 @@ class Complaint extends CI_Controller {
         $report_categories = $this->input->post('rgv_report_category');
         $report_categories_cnt = count($report_categories);
 
-
+        $usr_cats = [];
         if($report_categories_cnt>0){
             for($i=0;$i<$report_categories_cnt;$i++){
-                
+                array_push($usr_cats,$report_categories[$i]);
                 $cat = $this->M_report_assessments->getByReportIDCategoryID($report_id,$report_categories[$i]);
-                
                 if(empty($cat)){
                     $report_category_data = array(
                         'report_id' => $this->security->xss_clean($report_id),
@@ -403,28 +402,28 @@ class Complaint extends CI_Controller {
                         return;
                     }
                 }
-
-
-                
-                
             }
         }
 
-        $categories = [];
-        if($report_categories_cnt>0){
-            for($i=0;$i<$report_categories_cnt;$i++){
-                array_push($categories,$report_categories[$i]);
-            }
-        }
-
-        $cntr = 0;
         $ctgrs = $this->M_report_assessments->getByReportID($report_id);
-        if(in_array($categories,$ctgrs)){
-            $cntr = $cntr + 1;
+        if(!empty($ctgrs)){
+            foreach($ctgrs as $key => $val){
+                if(!in_array($val->rgv_report_category_id,$usr_cats)){
+                    $report_category_data = array(
+                        'deleted_by' => $this->security->xss_clean($this->session->userdata('username')),
+                        'deleted_at' => $this->security->xss_clean(date('y-m-d H:i:s')),
+                    );
+    
+                    $report_category_id = $this->M_report_assessments->update($val->id,$report_category_data);
+                    if($report_category_id<=0){
+                        $response['status'] = 0;
+                        $response['message'] = 'Something went wrong. Please contact your technical support. (5)';
+                        return;
+                    }
+                }
+            }
         }
-        $response['ctgrs'] = $ctgrs;
-        $response['categories'] = $categories;
-        $response['cntr'] = $cntr;
+        
         echo json_encode($response);
 
         return;
