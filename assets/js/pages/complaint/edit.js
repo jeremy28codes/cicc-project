@@ -59,7 +59,7 @@ $(document).ready(function(){
 
         // form.classList.add("was-validated");
         var formData = new FormData(form);
-
+        console.log(formData);
         $.ajax({
             url: base_url + "Complaint/update",
             type: "POST",
@@ -69,6 +69,8 @@ $(document).ready(function(){
             processData: false,
             dataType: 'json',
         }).done(function (response) {
+
+            console.log(response);
 
             if (response.status) {
 

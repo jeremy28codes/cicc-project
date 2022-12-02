@@ -60,6 +60,25 @@ clASs Report_assessments_model extends CI_Model {
     
     }
 
+    public function getByReportIDCategoryID($id, $rgv_report_category_id)
+    {
+        $query = $this->db->select('a.*
+                                    , b.name as report_assessment_name')
+            ->from($this->table.' a')
+            ->join('system_reference_group_values b', 'a.rgv_report_category_id = b.id', 'left outer')
+            ->where('a.deleted_by', NULL)
+            ->where('a.deleted_at', NULL)
+            ->where('b.deleted_by', NULL)
+            ->where('b.deleted_at', NULL)
+            ->where('a.report_id', $id)
+            ->where('a.rgv_report_category_id', $rgv_report_category_id)
+            ->order_by(1, "ASC")
+            ->get();
+
+        return $query->result();
+    
+    }
+
     public function getByReportCategoryID($id)
     {
         $query = $this->db->select('a.*
