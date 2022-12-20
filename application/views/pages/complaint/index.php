@@ -149,39 +149,42 @@
 
                                                         $dt_received        =    isset($value->date_received) && $value->date_received ? date('Y-m-d', strtotime($value->date_received)) : '';
                                                     ?>
-                                                    <tr>
-                                                        <td class="text-center"></td>
-                                                        <td class="text-center"><?= $value->id ?></td>
-                                                        <td class="text-center"><?= $value->reference_number ?></td>
-                                                        <td><?= strtoupper($value->victim_last_name.", ".$value->victim_first_name." ".$value->victim_middle_name) ?></td>
-                                                        <td class="text-center"><?= $dt_received ?> <?= $value->time_received ?></td>
-                                                        <td class="text-center"><?= $value->report_type ?></td>
-                                                        <td><?= $value->description_of_incident ?></td>
-                                                        <td><?= $value->officer_on_case ?></td>
-                                                        <td>
-                                                            <?php if(!empty($report_categories)): ?>
-                                                                <?php foreach($report_categories as $key => $rc): ?>
-                                                                    <?= $rc->report_assessment_name?>;
-                                                                    <?php $report_categories_ctr = $report_categories_ctr + 1; ?>
-                                                                <?php endforeach; ?> 
-                                                            <?php endif; ?>
-                                                        </td>
-                                                        <td>
-                                                            <?php if(!empty($report_statuses)): ?>
-                                                                <?php foreach($report_statuses as $key => $rs): ?>
-                                                                    <?= $rs->status?>;
-                                                                    <?php $report_statuses_ctr = $report_statuses_ctr + 1; ?>
-                                                                <?php endforeach; ?> 
-                                                            <?php endif; ?>
-                                                        </td>
-                                                        <td><?= $value->actions_taken ?></td>
-                                                        <td><?= $value->after_status_report ?></td>
-                                                        <td class="text-center">
-                                                            <a class="btn waves-effect waves-light btn-xs btn-warning m-b-5" href="<?= base_url() ?>Complaint/View/<?= $value->id ?>">View</a>
-                                                            <a class="btn waves-effect waves-light btn-xs btn-success m-b-5" href="<?= base_url() ?>Complaint/Edit/<?= $value->id ?>">Edit</a>
-                                                            <a id="btn-delete" data-id="<?= $value->id ?>" class="btn waves-effect waves-light btn-xs btn-danger m-b-5" href="javascript:void(0);">Delete</a>
-                                                        </td>
-                                                    </tr>
+                                                    <?php if(!empty($report_categories)): ?>
+                                                        <tr>
+                                                            <td class="text-center"></td>
+                                                            <td class="text-center"><?= $value->id ?></td>
+                                                            <td class="text-center"><?= $value->reference_number ?></td>
+                                                            <td><?= strtoupper($value->victim_last_name.", ".$value->victim_first_name." ".$value->victim_middle_name) ?></td>
+                                                            <td class="text-center"><?= $dt_received ?> <?= $value->time_received ?></td>
+                                                            <td class="text-center"><?= $value->report_type ?></td>
+                                                            <td><?= $value->description_of_incident ?></td>
+                                                            <td><?= $value->officer_on_case ?></td>
+                                                            <td>
+                                                                <?php if(!empty($report_categories)): ?>
+                                                                    <?php foreach($report_categories as $key => $rc): ?>
+                                                                        <?= $rc->report_assessment_name?>;
+                                                                        <?php $report_categories_ctr = $report_categories_ctr + 1; ?>
+                                                                    <?php endforeach; ?> 
+                                                                <?php endif; ?>
+                                                            </td>
+                                                            <td>
+                                                                <?php if(!empty($report_statuses)): ?>
+                                                                    <?php foreach($report_statuses as $key => $rs): ?>
+                                                                        <?= $rs->status?>;
+                                                                        <?php $report_statuses_ctr = $report_statuses_ctr + 1; ?>
+                                                                    <?php endforeach; ?> 
+                                                                <?php endif; ?>
+                                                            </td>
+                                                            <td><?= $value->actions_taken ?></td>
+                                                            <td><?= $value->after_status_report ?></td>
+                                                            <td class="text-center">
+                                                                <a class="btn waves-effect waves-light btn-xs btn-warning m-b-5" href="<?= base_url() ?>Complaint/View/<?= $value->id ?>">View</a>
+                                                                <a class="btn waves-effect waves-light btn-xs btn-success m-b-5" href="<?= base_url() ?>Complaint/Edit/<?= $value->id ?>">Edit</a>
+                                                                <a id="btn-delete" data-id="<?= $value->id ?>" class="btn waves-effect waves-light btn-xs btn-danger m-b-5" href="javascript:void(0);">Delete</a>
+                                                            </td>
+                                                        </tr>
+                                                    <?php endif; ?>
+                                                    
                                                 <?php endforeach; ?>
                                             <?php endif; ?>
                                         </tbody>
