@@ -121,11 +121,11 @@
                                         <thead class="table-dark">
                                             <tr>
                                                 <th class="text-center text-white" style="width: 5%;">#</th>
-                                                <th class="text-center text-white">ID</th>
+                                                <th class="text-center text-white" style="width: 5%;">ID</th>
                                                 <th class="text-center text-white" style="width: 20%;"> Reference Number </th>
+                                                <th class="text-center text-white" style="width: 20%;"> Complainant </th>
                                                 <th class="text-center text-white" style="width: 20%;"> Date & Time Received </th>
                                                 <th class="text-center text-white" style="width: 20%;"> Report Type </th>
-                                                <th hidden> Complainant </th>
                                                 <th hidden> Report Details </th>
                                                 <th hidden> Officer-On-Case </th>
                                                 <th hidden> Cybercrime Offenses </th>
@@ -153,9 +153,9 @@
                                                         <td class="text-center"></td>
                                                         <td class="text-center"><?= $value->id ?></td>
                                                         <td class="text-center"><?= $value->reference_number ?></td>
+                                                        <td><?= strtoupper($value->victim_last_name.", ".$value->victim_first_name." ".$value->victim_middle_name) ?></td>
                                                         <td class="text-center"><?= $dt_received ?> <?= $value->time_received ?></td>
                                                         <td class="text-center"><?= $value->report_type ?></td>
-                                                        <td><?= strtoupper($value->victim_last_name.", ".$value->victim_first_name." ".$value->victim_middle_name) ?></td>
                                                         <td><?= $value->description_of_incident ?></td>
                                                         <td><?= $value->officer_on_case ?></td>
                                                         <td>
