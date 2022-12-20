@@ -11,7 +11,21 @@ clASs Reports_model extends CI_Model {
 
     public function getAll()
     {
-        $query = $this->db->select('a.*
+        $query = $this->db->select('a.id
+                                    ,a.reference_number
+                                    ,a.date_received
+                                    ,a.time_received
+                                    ,a.rgv_report_type_id
+                                    ,a.rgv_report_category_id
+                                    ,a.report_modus
+                                    ,a.report_group
+                                    ,a.started_at
+                                    ,a.completed_at
+                                    ,a.description_of_incident
+                                    ,a.officer_on_case
+                                    ,a.actions_taken
+                                    ,a.after_status_report
+                                    ,a.remarks
                                     ,b.name as report_type,
                                     ,c.last_name as victim_last_name
                                     ,c.first_name as victim_first_name
@@ -26,6 +40,25 @@ clASs Reports_model extends CI_Model {
             ->where('b.deleted_at', NULL)
             ->where('c.deleted_by', NULL)
             ->where('c.deleted_at', NULL)
+            ->group_by("a.id
+                        ,a.reference_number
+                        ,a.date_received
+                        ,a.time_received
+                        ,a.rgv_report_type_id
+                        ,a.rgv_report_category_id
+                        ,a.report_modus
+                        ,a.report_group
+                        ,a.started_at
+                        ,a.completed_at
+                        ,a.description_of_incident
+                        ,a.officer_on_case
+                        ,a.actions_taken
+                        ,a.after_status_report
+                        ,a.remarks
+                        ,b.name
+                        ,c.last_name
+                        ,c.first_name
+                        ,c.middle_name")
             ->order_by(1, "DESC")
             ->get();
 
@@ -34,7 +67,21 @@ clASs Reports_model extends CI_Model {
 
     public function getAllWithFilter($filters)
     {
-        $query = $this->db->select('a.*
+        $query = $this->db->select('a.id
+                                    ,a.reference_number
+                                    ,a.date_received
+                                    ,a.time_received
+                                    ,a.rgv_report_type_id
+                                    ,a.rgv_report_category_id
+                                    ,a.report_modus
+                                    ,a.report_group
+                                    ,a.started_at
+                                    ,a.completed_at
+                                    ,a.description_of_incident
+                                    ,a.officer_on_case
+                                    ,a.actions_taken
+                                    ,a.after_status_report
+                                    ,a.remarks
                                     ,b.name as report_type
                                     ,c.last_name as victim_last_name
                                     ,c.first_name as victim_first_name
@@ -83,7 +130,26 @@ clASs Reports_model extends CI_Model {
         if ($filters["officer_on_case"]) {
             $query->where('a.officer_on_case', $filters["officer_on_case"]);
         }
-        $query->order_by(1, "DESC");
+        $query->group_by("a.id
+                        ,a.reference_number
+                        ,a.date_received
+                        ,a.time_received
+                        ,a.rgv_report_type_id
+                        ,a.rgv_report_category_id
+                        ,a.report_modus
+                        ,a.report_group
+                        ,a.started_at
+                        ,a.completed_at
+                        ,a.description_of_incident
+                        ,a.officer_on_case
+                        ,a.actions_taken
+                        ,a.after_status_report
+                        ,a.remarks
+                        ,b.name
+                        ,c.last_name
+                        ,c.first_name
+                        ,c.middle_name")
+                        ->order_by(1, "DESC");
               
         return $query->get()->result();
     }

@@ -146,12 +146,14 @@
                                                         $report_statuses = $this->M_report_statuses->getByReportID($value->id);
                                                         $report_statuses_cnt = count($report_statuses);
                                                         $report_statuses_ctr = 0;
+
+                                                        $dt_received        =    isset($value->date_received) && $value->date_received ? date('Y-m-d', strtotime($value->date_received)) : '';
                                                     ?>
                                                     <tr>
                                                         <td class="text-center"></td>
                                                         <td class="text-center"><?= $value->id ?></td>
                                                         <td class="text-center"><?= $value->reference_number ?></td>
-                                                        <td class="text-center"><?= $value->date_received ?> <?= $value->time_received ?></td>
+                                                        <td class="text-center"><?= $dt_received ?> <?= $value->time_received ?></td>
                                                         <td class="text-center"><?= $value->report_type ?></td>
                                                         <td><?= strtoupper($value->victim_last_name.", ".$value->victim_first_name." ".$value->victim_middle_name) ?></td>
                                                         <td><?= $value->description_of_incident ?></td>

@@ -33,9 +33,46 @@
     <!-- Container fluid  -->
     <!-- ============================================================== -->
     <div class="container-fluid">
-        <!-- ============================================================== -->
-        <!-- Sales chart -->
-        <!-- ============================================================== -->
+    <div class="row">
+            <div class="col-sm-12 col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Offenses</h4>
+                        <div class="status m-t-30" style="min-height: 500px; width:100%"></div>
+                        <div class="chart1 m-t-40" style="position: relative; height:250px;"></div>
+                        <!-- <div class="row">
+                            <div class="col-4 border-right">
+                                <i class="fa fa-circle text-primary"></i>
+                                <h4 class="mb-0 font-medium">5489</h4>
+                                <span>Success</span>
+                            </div>
+                            <div class="col-4 border-right p-l-20">
+                                <i class="fa fa-circle text-info"></i>
+                                <h4 class="mb-0 font-medium">954</h4>
+                                <span>Pending</span>
+                            </div>
+                            <div class="col-4 p-l-20">
+                                <i class="fa fa-circle text-success"></i>
+                                <h4 class="mb-0 font-medium">736</h4>
+                                <span>Failed</span>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="col-sm-12 col-lg-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Offenses</h4>
+                        <div class="chart1 m-t-40" style="position: relative; height:250px;"></div>
+                        <ul class="list-inline m-t-30 text-center font-12">
+                            <li class="list-inline-item text-muted"><i class="fa fa-circle text-info m-r-5"></i> This Year</li>
+                            <li class="list-inline-item text-muted"><i class="fa fa-circle text-light m-r-5"></i> Last Year</li>
+                        </ul>
+                    </div>
+                </div>
+            </div> -->
+        </div>
         <div class="row">
             <?php foreach($offenses as $key => $value): ?>
                 <?php 
@@ -63,67 +100,6 @@
                 </div>
             <?php endforeach; ?>
         </div>
-        <!-- ============================================================== -->
-        <!-- Sales chart -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Ravenue - page-view-bounce rate -->
-        <!-- ============================================================== -->
-        <div class="row">
-            <div class="col-sm-12 col-lg-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">Offenses</h4>
-                        <div class="status m-t-30" style="min-height: 500px; width:100%"></div>
-                        <!-- <div class="row">
-                            <div class="col-4 border-right">
-                                <i class="fa fa-circle text-primary"></i>
-                                <h4 class="mb-0 font-medium">5489</h4>
-                                <span>Success</span>
-                            </div>
-                            <div class="col-4 border-right p-l-20">
-                                <i class="fa fa-circle text-info"></i>
-                                <h4 class="mb-0 font-medium">954</h4>
-                                <span>Pending</span>
-                            </div>
-                            <div class="col-4 p-l-20">
-                                <i class="fa fa-circle text-success"></i>
-                                <h4 class="mb-0 font-medium">736</h4>
-                                <span>Failed</span>
-                            </div>
-                        </div> -->
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-12 col-lg-8">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center">
-                            <div>
-                                <h4 class="card-title">Yearly Comparison</h4>
-                            </div>
-                            <div class="ml-auto">
-                                <div class="dl m-b-10">
-                                    <select class="custom-select border-0 text-muted">
-                                        <option value="0" selected="">2018</option>
-                                        <option value="1">2015</option>
-                                        <option value="2">2016</option>
-                                        <option value="3">2017</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="chart1 m-t-40" style="position: relative; height:250px;"></div>
-                        <ul class="list-inline m-t-30 text-center font-12">
-                            <li class="list-inline-item text-muted"><i class="fa fa-circle text-info m-r-5"></i> This Year</li>
-                            <li class="list-inline-item text-muted"><i class="fa fa-circle text-light m-r-5"></i> Last Year</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- ============================================================== -->
-        <!-- Ravenue - page-view-bounce rate -->
-        <!-- ============================================================== -->
+        
         
         

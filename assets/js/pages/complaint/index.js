@@ -47,6 +47,7 @@ $(document).ready(function(){
 
     table.buttons().container().appendTo('#table_wrapper .col-md-6:eq(0)');
     $('.buttons-copy, .buttons-csv, .buttons-print, .buttons-pdf, .buttons-excel').addClass('dt-button-primary');
+    
     table.on('click', 'td.dt-control', function () {
         var tr = $(this).closest('tr');
         var row = table.row(tr);

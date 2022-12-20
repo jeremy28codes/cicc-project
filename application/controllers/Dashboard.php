@@ -34,6 +34,11 @@ class Dashboard extends CI_Controller {
 	
 	public function index()
 	{
+        if (!($this->session->userdata('username')))
+		{
+		    redirect('auth'); 
+        }
+        
 		$data['page_info'] = array(
             'title' => 'Home',
             'system_web_module' => 'Home',
@@ -58,7 +63,7 @@ class Dashboard extends CI_Controller {
 		$this->load->view('_includes/topbar', $data);
 		$this->load->view('_includes/side-nav', $data);
 		$this->load->view('pages/dashboard/dashboard', $data);
-		$this->load->view('_includes/customizer', $data);
+		// $this->load->view('_includes/customizer', $data);
 		$this->load->view('_includes/footer', $data);
 	}
 

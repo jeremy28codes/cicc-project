@@ -44,6 +44,18 @@
                                         <div class="col-md-6">
                                             <h2 class="card-title">Create</h2>
                                         </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-9">
+                                                </div>
+                                                <div class="col-md-3 m-b-5">
+                                                    <a href="<?= base_url()?>Complaint" class="btn btn-danger font-weight-medium align-items-center" style="width:100%;">
+                                                            <i class="fas fa-arrow-left"></i>&nbsp;&nbsp;
+                                                            Back
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <hr/>
@@ -285,10 +297,30 @@
                                             </div>
                                         </div>
                                         <div class="col-12 text-right">
-                                            <button id="btnSubmit" class="btn btn-info" type="submit">
-                                            <i class="loading-icon fa fa-spinner fa-spin hide"></i> 
-                                            <span class="btn-txt">SUBMIT</span>
-                                            </button>
+                                            <div class="row">
+                                                <div class="col-md-4"></div>
+                                                <div class="col-md-8">
+                                                    <div class="form-body">
+                                                        <div class="card-body">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <a href="<?= base_url()?>Complaint" class="btn btn-danger font-weight-medium align-items-center" style="width:100%;">
+                                                                        <!-- <i class="fas fa-arrow-left"></i>&nbsp;&nbsp; -->
+                                                                        Cancel
+                                                                    </a>
+                                                                </div>
+                                                                <div class="col-md-6"></div>
+                                                                <div class="col-md-3">
+                                                                    <button id="btnSubmit" class="btn btn-info" type="submit" style="width:100%;">
+                                                                        <i class="loading-icon fa fa-spinner fa-spin hide"></i> 
+                                                                        <span class="btn-txt">SUBMIT</span>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </form>
                                 </div>

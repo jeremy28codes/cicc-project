@@ -71,6 +71,22 @@ if(!empty($financial_transactions)){
     $ft_ctr = count($financial_transactions);
 }
 
+
+$arr_categories = [];
+if(!empty($report_categories)){
+    foreach($report_categories as $key => $value){
+        array_push($arr_categories,$value->report_assessment_name);
+    }
+}
+
+$arr_report_statuses = [];
+if(!empty($report_statuses)){
+    foreach($report_statuses as $key => $value){
+        array_push($arr_report_statuses,$value->status);
+    }
+}
+
+// echo json_encode($arr_report_statuses);
 ?>
             <!-- ============================================================== -->
             <!-- Bread crumb and right sidebar toggle -->
@@ -215,7 +231,7 @@ if(!empty($financial_transactions)){
                                                                 <?php if(!empty($offenses)): ?>
                                                                     <?php foreach($offenses as $key => $value): ?>
                                                                         <div class="col-md-6 mb-2">
-                                                                            <label for="rgv_report_category_<?= $c ?>"><input type="checkbox" class="form-input" id="rgv_report_category_<?= $c ?>" name="rgv_report_category[]" value="<?= $value->id ?>" <?= (in_array($value->name,$report_categories) ? " checked" :"")?> > <?= $value->name ?></label>
+                                                                            <label for="rgv_report_category_<?= $c ?>"><input type="checkbox" class="form-input" id="rgv_report_category_<?= $c ?>" name="rgv_report_category[]" value="<?= $value->id ?>" <?= (in_array($value->name,$arr_categories) ? " checked" :"")?> > <?= $value->name ?></label>
                                                                         </div>
                                                                         <?php $c = $c + 1; ?>
                                                                     <?php endforeach; ?>
@@ -283,8 +299,8 @@ if(!empty($financial_transactions)){
                                                                     <div class="invalid-feedback">This field is required!</div>
                                                                 </div>
                                                                 <div class="col-md-6 mb-2">
-                                                                    <label for="mobile_number" class="form-label">Mobile Number <code>(numbers only) *</code></label>
-                                                                    <input type="number" id="mobile_number" name="mobile_number" class="form-control form-control-sm" value="<?= $victim_mobile_number?>" min="0" placeholder="09XXXXXXXXX" required> 
+                                                                    <label for="mobile_number" class="form-label">Mobile Number <code>(numbers only) </code></label>
+                                                                    <input type="number" id="mobile_number" name="mobile_number" class="form-control form-control-sm" value="<?= $victim_mobile_number?>" min="0" placeholder="09XXXXXXXXX"> 
                                                                     <div class="invalid-feedback">This field is required!</div>
                                                                 </div>
                                                                 <div class="col-md-6 mb-2">
@@ -563,7 +579,7 @@ if(!empty($financial_transactions)){
                                                                                     <tr>
                                                                                         <td>
                                                                                             <div class="mb-3 pb-3 border-bottom">
-                                                                                                <input type="hidden" id="ft_id_<?= $f ?>" name="ft_id_<?= $s ?>" value="<?php echo $value->id ?>" />
+                                                                                                <input type="hidden" id="ft_id_<?= $f ?>" name="ft_id_<?= $f ?>" value="<?php echo $value->id ?>" />
                                                                                                 <div class="row">
                                                                                                     <div class="col-md-12">
                                                                                                         <div class="card pb-0">
@@ -581,14 +597,14 @@ if(!empty($financial_transactions)){
                                                                                                                         <select id="ft_rgv_transaction_type_id_<?= $f ?>" name="ft_rgv_transaction_type_id_<?= $f ?>" class="form-control form-control-sm" required>
                                                                                                                             <option value="" <?= ($value->rgv_transaction_type_id=="" ? " selected":"") ?>>Please select one ...</option>
                                                                                                                             <?php foreach($transaction_types as $key => $t_value): ?>
-                                                                                                                                <option value="<?php echo $t_value->id ?>" <?= ($value->rgv_transaction_type_id==$t_value->id ? " selected":"") ?>><?php echo $c_value->name ?></option>
+                                                                                                                                <option value="<?php echo $t_value->id ?>" <?= ($value->rgv_transaction_type_id==$t_value->id ? " selected":"") ?>><?php echo $t_value->name ?></option>
                                                                                                                             <?php endforeach; ?>
                                                                                                                         </select>
                                                                                                                         <div class="invalid-feedback">This field is required!</div>
                                                                                                                     </div>
                                                                                                                     <div class="col-md-8">
                                                                                                                         <label for="ft_others_<?= $f ?>" class="form-label">If others, please specify here <code id="ft_req_others_" hidden>*</code></label>
-                                                                                                                        <input type="text" id="ft_others_<?= $f ?>" name="ft_others_<?= $f ?>" class="form-control form-control-sm" placeholder="Enter transaction type here">
+                                                                                                                        <input type="text" id="ft_others_<?= $f ?>" name="ft_others_<?= $f ?>" class="form-control form-control-sm" value="<?= $value->others ?>" placeholder="Enter transaction type here">
                                                                                                                         <div class="invalid-feedback">This field is required!</div>
                                                                                                                     </div>
                                                                                                                 </div>
@@ -601,14 +617,14 @@ if(!empty($financial_transactions)){
                                                                                                                     <div class="col-md-3 mb-2">
                                                                                                                         <label for="ft_is_sent_<?= $f ?>" class="form-label">Is the money sent? </label>
                                                                                                                         <select id="ft_is_sent_<?= $f ?>" name="ft_is_sent_<?= $f ?>" class="form-select form-select-sm">
-                                                                                                                            <option value="0">No</option>
-                                                                                                                            <option value="1" selected>Yes</option>
+                                                                                                                            <option value="0" <?= ($value->is_sent=="0") ? " selected":"" ?>>No</option>
+                                                                                                                            <option value="1" <?= ($value->is_sent=="1") ? " selected":"" ?>>Yes</option>
                                                                                                                         </select>
                                                                                                                         <div class="invalid-feedback">This field is required!</div>
                                                                                                                     </div>
                                                                                                                     <div class="col-md-5">
                                                                                                                         <label for="ft_amount_<?= $f ?>" class="form-label">Amount <code>*</code></label>
-                                                                                                                        <input type="number" id="ft_amount_<?= $f ?>" name="ft_amount_<?= $f ?>" min="0" max="999999999" step="0.01" pattern="^\d+(?:\.\d{1,2})?$" value="<?= $amount ?>" class="form-control form-control-sm" placeholder="0.00" required>
+                                                                                                                        <input type="number" id="ft_amount_<?= $f ?>" name="ft_amount_<?= $f ?>" min="0" max="999999999" step="0.01" pattern="^\d+(?:\.\d{1,2})?$" value="<?= $value->amount ?>" class="form-control form-control-sm" placeholder="0.00" required>
                                                                                                                         <div class="invalid-feedback">This field is required!</div>
                                                                                                                     </div>
                                                                                                                 </div>
@@ -622,7 +638,7 @@ if(!empty($financial_transactions)){
                                                                                                                     <div class="border-bottom p-1 bg-primary">
                                                                                                                         <div class="d-md-flex align-items-center">
                                                                                                                             <div class="mr-sm-2">
-                                                                                                                                <h4 class="card-title p-1 m-1 text-light">SENDER\'S BANK INFO</h4>
+                                                                                                                                <h4 class="card-title p-1 m-1 text-light">SENDER'S BANK INFO</h4>
                                                                                                                             </div>
                                                                                                                         </div>
                                                                                                                     </div>
@@ -630,19 +646,19 @@ if(!empty($financial_transactions)){
                                                                                                                         <div class="row">
                                                                                                                             <div class="col-md-12 mb-2">
                                                                                                                                 <label for="ft_s_bank_name_<?= $f ?>" class="form-label">Bank Name </label>
-                                                                                                                                <input type="text" id="ft_s_bank_name_<?= $f ?>" name="ft_s_bank_name_<?= $f ?>" class="form-control form-control-sm" placeholder="Enter bank name here">
+                                                                                                                                <input type="text" id="ft_s_bank_name_<?= $f ?>" name="ft_s_bank_name_<?= $f ?>" class="form-control form-control-sm" value="<?= $value->victim_bank_name ?>" placeholder="Enter bank name here">
                                                                                                                                 <div class="invalid-feedback">This field is required!</div>
                                                                                                                             </div>
                                                                                                                         </div>
                                                                                                                         <div class="row">
                                                                                                                             <div class="col-md-6 mb-2">
                                                                                                                                 <label for="ft_s_account_name_<?= $f ?>" class="form-label">Account Name </label>
-                                                                                                                                <input type="text" id="ft_s_account_name_<?= $f ?>" name="ft_s_account_name_<?= $f ?>" class="form-control form-control-sm" placeholder="Enter account name here">
+                                                                                                                                <input type="text" id="ft_s_account_name_<?= $f ?>" name="ft_s_account_name_<?= $f ?>" class="form-control form-control-sm" value="<?= $value->victim_account_name ?>" placeholder="Enter account name here">
                                                                                                                                 <div class="invalid-feedback">This field is required!</div>
                                                                                                                             </div>
                                                                                                                             <div class="col-md-6 mb-2">
                                                                                                                                 <label for="ft_s_account_no_<?= $f ?>" class="form-label">Account No. </label>
-                                                                                                                                <input type="text" id="ft_s_account_no_<?= $f ?>" name="ft_s_account_no_<?= $f ?>" class="form-control form-control-sm" placeholder="Enter account no. here">
+                                                                                                                                <input type="text" id="ft_s_account_no_<?= $f ?>" name="ft_s_account_no_<?= $f ?>" class="form-control form-control-sm" value="<?= $value->victim_account_number ?>" placeholder="Enter account no. here">
                                                                                                                                 <div class="invalid-feedback">This field is required!</div>
                                                                                                                             </div>
                                                                                                                         </div>
@@ -650,31 +666,35 @@ if(!empty($financial_transactions)){
                                                                                                                             <div class="col-md-6 mb-2">
                                                                                                                                 <label for="ft_s_country_<?= $f ?>" class="form-label">Country </label>
                                                                                                                                 <select id="ft_s_country_<?= $f ?>" name="ft_s_country_<?= $f ?>" class="form-control form-control-sm">
+                                                                                                                                    <option value="" <?= ($value->victim_bank_country == "") ? " selected":"" ?>></option>
+                                                                                                                                    <?php foreach($countries as $key => $t_country) ?>
+                                                                                                                                        <option value="<?= $t_country->name?>" <?= ($value->victim_bank_country == $t_country->name) ? " selected":"" ?>> <?= $t_country->name?></option>
+                                                                                                                                    <?php ?>
                                                                                                                                 </select>
                                                                                                                                 <div class="invalid-feedback">This field is required!</div>
                                                                                                                             </div>
                                                                                                                             <div class="col-md-6 mb-2">
                                                                                                                                 <label for="ft_s_province_<?= $f ?>" class="form-label">Province </label>
-                                                                                                                                <input type="text" id="ft_s_province_<?= $f ?>" name="ft_s_province_<?= $f ?>" class="form-control form-control-sm" placeholder="Enter province here">
+                                                                                                                                <input type="text" id="ft_s_province_<?= $f ?>" name="ft_s_province_<?= $f ?>" class="form-control form-control-sm" value="<?= $value->victim_bank_province	 ?>" placeholder="Enter province here">
                                                                                                                                 <div class="invalid-feedback">This field is required!</div>
                                                                                                                             </div>
                                                                                                                         </div>
                                                                                                                         <div class="row">
                                                                                                                             <div class="col-md-6 mb-2">
                                                                                                                                 <label for="ft_s_city_<?= $f ?>" class="form-label">City </label>
-                                                                                                                                <input type="text" id="ft_s_city_<?= $f ?>" name="ft_s_city_<?= $f ?>" class="form-control form-control-sm" placeholder="Enter city here">
+                                                                                                                                <input type="text" id="ft_s_city_<?= $f ?>" name="ft_s_city_<?= $f ?>" class="form-control form-control-sm" value="<?= $value->victim_bank_city	 ?>" placeholder="Enter city here">
                                                                                                                                 <div class="invalid-feedback">This field is required!</div>
                                                                                                                             </div>
                                                                                                                             <div class="col-md-6 mb-2">
                                                                                                                                 <label for="ft_s_zip_code_<?= $f ?>" class="form-label">Zip Code </label>
-                                                                                                                                <input type="text" id="ft_s_zip_code_<?= $f ?>" name="ft_s_zip_code_<?= $f ?>" class="form-control form-control-sm" placeholder="Enter zip code here">
+                                                                                                                                <input type="text" id="ft_s_zip_code_<?= $f ?>" name="ft_s_zip_code_<?= $f ?>" class="form-control form-control-sm" value="<?= $value->victim_bank_zip_code	 ?>" placeholder="Enter zip code here">
                                                                                                                                 <div class="invalid-feedback">This field is required!</div>
                                                                                                                             </div>
                                                                                                                         </div>
                                                                                                                         <div class="row">
                                                                                                                             <div class="col-md-12 mb-2">
                                                                                                                                 <label for="ft_s_address_<?= $f ?>" class="form-label">Address </label>
-                                                                                                                                <textarea id="ft_s_address_<?= $f ?>" name="ft_s_address_<?= $f ?>" class="form-control form-control-sm" rows="2" placeholder="Enter address here"></textarea>
+                                                                                                                                <textarea id="ft_s_address_<?= $f ?>" name="ft_s_address_<?= $f ?>" class="form-control form-control-sm" rows="2" placeholder="Enter address here"><?= $value->victim_bank_address1	 ?></textarea>
                                                                                                                                 <div class="invalid-feedback">This field is required!</div>
                                                                                                                             </div>
                                                                                                                         </div>
@@ -694,19 +714,19 @@ if(!empty($financial_transactions)){
                                                                                                                         <div class="row">
                                                                                                                             <div class="col-md-12 mb-2">
                                                                                                                                 <label for="ft_r_bank_name_<?= $f ?>" class="form-label">Bank Name </label>
-                                                                                                                                <input type="text" id="ft_r_bank_name_<?= $f ?>" name="ft_r_bank_name_<?= $f ?>" class="form-control form-control-sm" placeholder="Enter bank name here">
+                                                                                                                                <input type="text" id="ft_r_bank_name_<?= $f ?>" name="ft_r_bank_name_<?= $f ?>" class="form-control form-control-sm" value="<?= $value->receipient_bank_name ?>"  placeholder="Enter bank name here">
                                                                                                                                 <div class="invalid-feedback">This field is required!</div>
                                                                                                                             </div>
                                                                                                                         </div>
                                                                                                                         <div class="row">
                                                                                                                             <div class="col-md-6 mb-2">
                                                                                                                                 <label for="ft_r_account_name_<?= $f ?>" class="form-label">Account Name </label>
-                                                                                                                                <input type="text" id="ft_r_account_name_<?= $f ?>" name="ft_r_account_name_<?= $f ?>" class="form-control form-control-sm" placeholder="Enter account name here">
+                                                                                                                                <input type="text" id="ft_r_account_name_<?= $f ?>" name="ft_r_account_name_<?= $f ?>" class="form-control form-control-sm" value="<?= $value->receipient_account_name ?>" placeholder="Enter account name here">
                                                                                                                                 <div class="invalid-feedback">This field is required!</div>
                                                                                                                             </div>
                                                                                                                             <div class="col-md-6">
                                                                                                                                 <label for="ft_r_account_no_<?= $f ?>" class="form-label">Account No. </label>
-                                                                                                                                <input type="text" id="ft_r_account_no_<?= $f ?>" name="ft_r_account_no_<?= $f ?>" class="form-control form-control-sm" placeholder="Enter account no. here">
+                                                                                                                                <input type="text" id="ft_r_account_no_<?= $f ?>" name="ft_r_account_no_<?= $f ?>" class="form-control form-control-sm" value="<?= $value->receipient_account_number ?>" placeholder="Enter account no. here">
                                                                                                                                 <div class="invalid-feedback">This field is required!</div>
                                                                                                                             </div>
                                                                                                                         </div>
@@ -714,31 +734,35 @@ if(!empty($financial_transactions)){
                                                                                                                             <div class="col-md-6 mb-2">
                                                                                                                                 <label for="ft_r_country_<?= $f ?>" class="form-label">Country </label>
                                                                                                                                 <select id="ft_r_country_<?= $f ?>" name="ft_r_country_<?= $f ?>" class="form-control form-control-sm">
+                                                                                                                                    <option value="" <?= ($value->receipient_bank_country == "") ? " selected":"" ?>></option>
+                                                                                                                                    <?php foreach($countries as $key => $t_country) ?>
+                                                                                                                                        <option value="<?= $t_country->name?>" <?= ($value->receipient_bank_country == $t_country->name) ? " selected":"" ?>> <?= $t_country->name?></option>
+                                                                                                                                    <?php ?>
                                                                                                                                 </select>
                                                                                                                                 <div class="invalid-feedback">This field is required!</div>
                                                                                                                             </div>
                                                                                                                             <div class="col-md-6 mb-2">
                                                                                                                                 <label for="ft_r_province_<?= $f ?>" class="form-label">Province </label>
-                                                                                                                                <input type="text" id="ft_r_province_<?= $f ?>" name="ft_r_province_<?= $f ?>" class="form-control form-control-sm" placeholder="Enter province here">
+                                                                                                                                <input type="text" id="ft_r_province_<?= $f ?>" name="ft_r_province_<?= $f ?>" class="form-control form-control-sm" value="<?= $value->receipient_bank_province ?>" placeholder="Enter province here">
                                                                                                                                 <div class="invalid-feedback">This field is required!</div>
                                                                                                                             </div>
                                                                                                                         </div>
                                                                                                                         <div class="row">
                                                                                                                             <div class="col-md-6 mb-2">
                                                                                                                                 <label for="ft_r_city_<?= $f ?>" class="form-label">City </label>
-                                                                                                                                <input type="text" id="ft_r_city_<?= $f ?>" name="ft_r_city_<?= $f ?>" class="form-control form-control-sm" placeholder="Enter city here">
+                                                                                                                                <input type="text" id="ft_r_city_<?= $f ?>" name="ft_r_city_<?= $f ?>" class="form-control form-control-sm" value="<?= $value->receipient_bank_city ?>"  placeholder="Enter city here">
                                                                                                                                 <div class="invalid-feedback">This field is required!</div>
                                                                                                                             </div>
                                                                                                                             <div class="col-md-6 mb-2">
                                                                                                                                 <label for="ft_r_zip_code_<?= $f ?>" class="form-label">Zip Code </label>
-                                                                                                                                <input type="text" id="ft_r_zip_code_<?= $f ?>" name="ft_r_zip_code_<?= $f ?>" class="form-control form-control-sm" placeholder="Enter zip code here">
+                                                                                                                                <input type="text" id="ft_r_zip_code_<?= $f ?>" name="ft_r_zip_code_<?= $f ?>" class="form-control form-control-sm" value="<?= $value->receipient_bank_zip_code ?>"  placeholder="Enter zip code here">
                                                                                                                                 <div class="invalid-feedback">This field is required!</div>
                                                                                                                             </div>
                                                                                                                         </div>
                                                                                                                         <div class="row">
                                                                                                                             <div class="col-md-12 mb-2">
                                                                                                                                 <label for="ft_r_address_<?= $f ?>" class="form-label">Address </label>
-                                                                                                                                <textarea id="ft_r_address_<?= $f ?>" name="ft_r_address_<?= $f ?>" class="form-control form-control-sm" rows="2" placeholder="Enter address here"></textarea>
+                                                                                                                                <textarea id="ft_r_address_<?= $f ?>" name="ft_r_address_<?= $f ?>" class="form-control form-control-sm" rows="2" placeholder="Enter address here"><?= $value->receipient_bank_address1 ?></textarea>
                                                                                                                                 <div class="invalid-feedback">This field is required!</div>
                                                                                                                             </div>
                                                                                                                         </div>
@@ -777,14 +801,14 @@ if(!empty($financial_transactions)){
                                                             <hr/>
                                                             <div class="row">
                                                                 <div class="col-md-12 mb-2">
-                                                                    <textarea id="actions_taken" name="actions_taken" class="form-control form-control-sm" placeholder="Enter descripton of incident here" rows="5" required></textarea>
+                                                                    <textarea id="actions_taken" name="actions_taken" class="form-control form-control-sm" placeholder="Enter actions taken here" rows="5" required><?= $actions_taken ?></textarea>
                                                                     <div class="invalid-feedback">This field is required!</div>
                                                                 </div>
                                                                 <div class="col-md-12 mb-2">
                                                                     <label for="report_status" class="form-label">Report Status</label>
                                                                     <select id="report_status" name="report_status[]" class="form-control form-control-sm" multiple="" style="height: 3rem;">
-                                                                        <?php foreach($report_statuses as $key => $value): ?>
-                                                                        <option value="<?php echo $value->status ?>"><?php echo $value->status ?></option>
+                                                                        <?php foreach($report_statuses_grouped as $key => $value): ?>
+                                                                        <option value="<?php echo $value->status ?>" <?= (in_array($value->status,$arr_report_statuses) ? " selected" :"")?>><?php echo $value->status ?></option>
                                                                         <?php endforeach; ?>
                                                                     </select>
                                                                 </div>  
@@ -795,7 +819,7 @@ if(!empty($financial_transactions)){
                                                             <hr/>
                                                             <div class="row">
                                                                 <div class="col-md-12 mb-2">
-                                                                    <textarea id="after_status_report" name="after_status_report" class="form-control form-control-sm" placeholder="Enter after status report here" rows="10"></textarea>
+                                                                    <textarea id="after_status_report" name="after_status_report" class="form-control form-control-sm" placeholder="Enter after status report here" rows="10"><?= $after_status_report ?></textarea>
                                                                     <div class="invalid-feedback">This field is required!</div>
                                                                 </div>
                                                             </div>
