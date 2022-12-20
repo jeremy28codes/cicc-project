@@ -133,7 +133,7 @@ class OnlineComplaint extends CI_Controller {
                     'description_of_incident' => $this->security->xss_clean($this->input->post('description_of_incident')),
                     'digital_signature' => $this->security->xss_clean(strtoupper($this->input->post('digital_signature'))),
                     'created_by' => $this->security->xss_clean($this->input->post('digital_signature')),
-                    'created_at' => $this->security->xss_clean(date('y-m-d H:i:s'))
+                    'created_at' => $this->security->xss_clean(date('Y-m-d H:i:s'))
                 );
 
                 $report_id = $this->M_reports->insert($report_data);
@@ -157,7 +157,7 @@ class OnlineComplaint extends CI_Controller {
                     'system_division_id' => $this->security->xss_clean($division_id),
                     'ctr' => $this->security->xss_clean(($ctr + 1)),
                     'created_by' => $this->security->xss_clean($this->input->post('digital_signature')),
-                    'created_at' => $this->security->xss_clean(date('y-m-d H:i:s'))
+                    'created_at' => $this->security->xss_clean(date('Y-m-d H:i:s'))
                 );
 
                 $reference_id = $this->M_report_reference_numbers->insert($reference_data);
@@ -189,7 +189,7 @@ class OnlineComplaint extends CI_Controller {
                     'business_it_poc' => $this->security->xss_clean($this->input->post('business_it_poc')),
                     'other_busines_poc' => $this->security->xss_clean($this->input->post('other_busines_poc')),
                     'created_by' => $this->security->xss_clean($this->input->post('digital_signature')),
-                    'created_at' => $this->security->xss_clean(date('y-m-d H:i:s'))
+                    'created_at' => $this->security->xss_clean(date('Y-m-d H:i:s'))
                 );
 
                 $victim_id = $this->M_victims->insert($victim_data);
@@ -225,7 +225,7 @@ class OnlineComplaint extends CI_Controller {
                         'city' => $this->security->xss_clean(strtoupper($this->input->post('w_city'))),
                         'zip_code' => $this->security->xss_clean($this->input->post('w_zip_code')),
                         'created_by' => $this->security->xss_clean($this->input->post('digital_signature')),
-                        'created_at' => $this->security->xss_clean(date('y-m-d H:i:s'))
+                        'created_at' => $this->security->xss_clean(date('Y-m-d H:i:s'))
                     );
 
                     $witness_id = $this->M_witnesses->insert($witness_data);
@@ -257,7 +257,7 @@ class OnlineComplaint extends CI_Controller {
                             'address1' => $this->security->xss_clean(strtoupper($this->input->post('s_address_'.$i))),
                             'zip_code' => $this->security->xss_clean($this->input->post('s_zip_code_'.$i)),
                             'created_by' => $this->security->xss_clean($this->input->post('digital_signature')),
-                            'created_at' => $this->security->xss_clean(date('y-m-d H:i:s'))
+                            'created_at' => $this->security->xss_clean(date('Y-m-d H:i:s'))
                         );
 
                         $suspect_id = $this->M_suspects->insert($suspect_data);
@@ -298,7 +298,7 @@ class OnlineComplaint extends CI_Controller {
                             'receipient_bank_city' => $this->security->xss_clean(strtoupper($this->input->post('ft_r_city_'.$i))),
                             'receipient_bank_zip_code' => $this->security->xss_clean($this->input->post('ft_r_zip_code_'.$i)),
                             'created_by' => $this->security->xss_clean($this->input->post('digital_signature')),
-                            'created_at' => $this->security->xss_clean(date('y-m-d H:i:s'))
+                            'created_at' => $this->security->xss_clean(date('Y-m-d H:i:s'))
                         );
 
                         $financial_transaction_id = $this->M_victim_financial_transactions->insert($financial_transaction_data);
@@ -342,7 +342,7 @@ class OnlineComplaint extends CI_Controller {
                             'file_size' => $size,
                             'file_path' => $path,
                             'created_by' => $this->security->xss_clean($this->input->post('digital_signature')),
-                            'created_at' => $this->security->xss_clean(date('y-m-d H:i:s'))
+                            'created_at' => $this->security->xss_clean(date('Y-m-d H:i:s'))
                         );
                         
                         $attachment_id = $this->M_report_attachments->insert($attachment_data);
@@ -399,7 +399,7 @@ class OnlineComplaint extends CI_Controller {
                                     'file_size' => $size,
                                     'file_path' => $path,
                                     'created_by' => $this->security->xss_clean($this->input->post('digital_signature')),
-                                    'created_at' => $this->security->xss_clean(date('y-m-d H:i:s'))
+                                    'created_at' => $this->security->xss_clean(date('Y-m-d H:i:s'))
                                 );
                                 
                                 $attachment_id = $this->M_report_attachments->insert($attachment_data);

@@ -185,7 +185,7 @@ class Complaint extends CI_Controller {
                     'actions_taken' => $this->security->xss_clean($this->input->post('actions_taken')),
                     'after_status_report' => $this->security->xss_clean($this->input->post('after_status_report')),
                     'created_by' => $this->security->xss_clean($this->session->userdata('username')),
-                    'created_at' => $this->security->xss_clean(date('y-m-d H:i:s')),
+                    'created_at' => $this->security->xss_clean(date('Y-m-d H:i:s')),
                 );
 
                 $report_id = $this->M_reports->insert($report_data);
@@ -208,7 +208,7 @@ class Complaint extends CI_Controller {
                     'system_division_id' => $this->security->xss_clean($division_id),
                     'ctr' => $this->security->xss_clean(($ctr + 1)),
                     'created_by' => $this->security->xss_clean($this->input->post('digital_signature')),
-                    'created_at' => $this->security->xss_clean(date('y-m-d H:i:s'))
+                    'created_at' => $this->security->xss_clean(date('Y-m-d H:i:s'))
                 );
 
                 $reference_id = $this->M_report_reference_numbers->insert($reference_data);
@@ -230,7 +230,7 @@ class Complaint extends CI_Controller {
                     'mobile_number' => $victim_mobile,
                     'address1' => $this->security->xss_clean($this->input->post('address')),
                     'created_by' => $this->security->xss_clean($this->session->userdata('username')),
-                    'created_at' => $this->security->xss_clean(date('y-m-d H:i:s')),
+                    'created_at' => $this->security->xss_clean(date('Y-m-d H:i:s')),
                 );
 
                 $victim_id = $this->M_victims->insert($victim_data);
@@ -262,7 +262,7 @@ class Complaint extends CI_Controller {
                         'ip_address' => $this->security->xss_clean($this->input->post('ip_address')),
                         'website_link' => $this->security->xss_clean($this->input->post('website')),
                         'created_by' => $this->security->xss_clean($this->session->userdata('username')),
-                        'created_at' => $this->security->xss_clean(date('y-m-d H:i:s')),
+                        'created_at' => $this->security->xss_clean(date('Y-m-d H:i:s')),
                     );
     
                     $suspect_id = $this->M_suspects->insert($suspect_data);
@@ -281,7 +281,7 @@ class Complaint extends CI_Controller {
                             'report_id' => $this->security->xss_clean($report_id),
                             'rgv_report_category_id' => $report_categories[$i],
                             'created_by' => $this->security->xss_clean($this->session->userdata('username')),
-                            'created_at' => $this->security->xss_clean(date('y-m-d H:i:s')),
+                            'created_at' => $this->security->xss_clean(date('Y-m-d H:i:s')),
                         );
 
                         $report_category_id = $this->M_report_assessments->insert($report_category_data);
@@ -303,7 +303,7 @@ class Complaint extends CI_Controller {
                             'report_id' => $this->security->xss_clean($report_id),
                             'status' => $report_statuses[$i],
                             'created_by' => $this->security->xss_clean($this->session->userdata('username')),
-                            'created_at' => $this->security->xss_clean(date('y-m-d H:i:s')),
+                            'created_at' => $this->security->xss_clean(date('Y-m-d H:i:s')),
                         );
 
                         $report_status_id = $this->M_report_statuses->insert($report_status_data);
@@ -421,7 +421,7 @@ class Complaint extends CI_Controller {
                     'actions_taken' => $this->security->xss_clean($this->input->post('actions_taken')),
                     'after_status_report' => $this->security->xss_clean($this->input->post('after_status_report')),
                     'updated_by' => $this->security->xss_clean($this->session->userdata('username')),
-                    'updated_at' => $this->security->xss_clean(date('y-m-d H:i:s')),
+                    'updated_at' => $this->security->xss_clean(date('Y-m-d H:i:s')),
                 );
 
                 $report_id = $this->M_reports->update($id, $report_data);
@@ -453,7 +453,7 @@ class Complaint extends CI_Controller {
                     'business_it_poc' => $this->security->xss_clean($this->input->post('business_it_poc')),
                     'other_busines_poc' => $this->security->xss_clean($this->input->post('other_busines_poc')),
                     'updated_by' => $this->security->xss_clean($this->session->userdata('username')),
-                    'updated_at' => $this->security->xss_clean(date('y-m-d H:i:s')),
+                    'updated_at' => $this->security->xss_clean(date('Y-m-d H:i:s')),
                 );
 
                 $victim_id = $this->M_victims->update($victim_id,$victim_data);
@@ -501,7 +501,7 @@ class Complaint extends CI_Controller {
                                 'website_link' => $suspect_website,
                                 'ip_address' => $suspect_ip_address,
                                 'updated_by' => $this->security->xss_clean($this->session->userdata('username')),
-                                'updated_at' => $this->security->xss_clean(date('y-m-d H:i:s')),
+                                'updated_at' => $this->security->xss_clean(date('Y-m-d H:i:s')),
                             );
 
                             $suspect_id = $this->M_suspects->update($suspect_id,$suspect_data);
@@ -528,7 +528,7 @@ class Complaint extends CI_Controller {
                                 'website_link' => $suspect_website,
                                 'ip_address' => $suspect_ip_address,
                                 'created_by' => $this->security->xss_clean($this->session->userdata('username')),
-                                'created_at' => $this->security->xss_clean(date('y-m-d H:i:s')),
+                                'created_at' => $this->security->xss_clean(date('Y-m-d H:i:s')),
                             );
 
                             $suspect_id = $this->M_suspects->insert($suspect_data);
@@ -597,7 +597,7 @@ class Complaint extends CI_Controller {
                                 'receipient_account_name' => $ft_recepient_account_name,
                                 'receipient_account_number' => $ft_recepient_account_no,
                                 'updated_by' => $this->security->xss_clean($this->session->userdata('username')),
-                                'updated_at' => $this->security->xss_clean(date('y-m-d H:i:s')),
+                                'updated_at' => $this->security->xss_clean(date('Y-m-d H:i:s')),
                             );  
 
                             $financial_transaction_id = $this->M_victim_financial_transactions->update($ft_id,$financial_transaction_data);
@@ -633,7 +633,7 @@ class Complaint extends CI_Controller {
                                 'receipient_account_name' => $ft_recepient_account_name,
                                 'receipient_account_number' => $ft_recepient_account_no,
                                 'created_by' => $this->security->xss_clean($this->session->userdata('username')),
-                                'created_at' => $this->security->xss_clean(date('y-m-d H:i:s')),
+                                'created_at' => $this->security->xss_clean(date('Y-m-d H:i:s')),
                             );
 
                             $financial_transaction_id = $this->M_victim_financial_transactions->insert($financial_transaction_data);
@@ -660,7 +660,7 @@ class Complaint extends CI_Controller {
                                     'report_id' => $this->security->xss_clean($report_id),
                                     'rgv_report_category_id' => $report_categories[$i],
                                     'created_by' => $this->security->xss_clean($this->session->userdata('username')),
-                                    'created_at' => $this->security->xss_clean(date('y-m-d H:i:s')),
+                                    'created_at' => $this->security->xss_clean(date('Y-m-d H:i:s')),
                                 );
                 
                                 $report_category_id = $this->M_report_assessments->insert($report_category_data);
@@ -679,7 +679,7 @@ class Complaint extends CI_Controller {
                             if(!in_array($val->rgv_report_category_id,$usr_cats)){
                                 $report_category_data = array(
                                     'deleted_by' => $this->security->xss_clean($this->session->userdata('username')),
-                                    'deleted_at' => $this->security->xss_clean(date('y-m-d H:i:s')),
+                                    'deleted_at' => $this->security->xss_clean(date('Y-m-d H:i:s')),
                                 );
                 
                                 $report_category_id = $this->M_report_assessments->update($val->id,$report_category_data);
@@ -706,7 +706,7 @@ class Complaint extends CI_Controller {
                                     'report_id' => $this->security->xss_clean($report_id),
                                     'status' => $report_statuses[$i],
                                     'created_by' => $this->security->xss_clean($this->session->userdata('username')),
-                                    'created_at' => $this->security->xss_clean(date('y-m-d H:i:s')),
+                                    'created_at' => $this->security->xss_clean(date('Y-m-d H:i:s')),
                                 );
         
                                 $report_status_id = $this->M_report_statuses->insert($report_status_data);
@@ -725,7 +725,7 @@ class Complaint extends CI_Controller {
                             if(!in_array($val->status,$usr_statuses)){
                                 $report_status_data = array(
                                     'deleted_by' => $this->security->xss_clean($this->session->userdata('username')),
-                                    'deleted_at' => $this->security->xss_clean(date('y-m-d H:i:s')),
+                                    'deleted_at' => $this->security->xss_clean(date('Y-m-d H:i:s')),
                                 );
                 
                                 $report_status_id = $this->M_report_statuses->update($val->id,$report_status_data);
@@ -752,7 +752,7 @@ class Complaint extends CI_Controller {
 
         $data = array(
             'deleted_by' => $this->security->xss_clean($this->session->userdata('username')),
-            'deleted_at' => $this->security->xss_clean(date('y-m-d H:i:s')),
+            'deleted_at' => $this->security->xss_clean(date('Y-m-d H:i:s')),
         );
 
         $id = $this->M_reports->delete($id, $data);
@@ -803,7 +803,7 @@ class Complaint extends CI_Controller {
     //             'actions_taken' => $value->actions_taken,
     //             'remarks' => $value->category,
     //             'created_by' => 'mazores-Migrate',
-    //             'created_at' => $this->security->xss_clean(date('y-m-d H:i:s')),
+    //             'created_at' => $this->security->xss_clean(date('Y-m-d H:i:s')),
     //         );
 
     //         $report_id = $this->M_reports->insert($report_data);
@@ -828,7 +828,7 @@ class Complaint extends CI_Controller {
     //             'system_division_id' => $this->security->xss_clean($division_id),
     //             'ctr' => $this->security->xss_clean(($ctr + 1)),
     //             'created_by' => 'mazores-Migrate',
-    //             'created_at' => $this->security->xss_clean(date('y-m-d H:i:s')),
+    //             'created_at' => $this->security->xss_clean(date('Y-m-d H:i:s')),
     //         );
 
     //         $reference_id = $this->M_report_reference_numbers->insert($reference_data);
@@ -855,7 +855,7 @@ class Complaint extends CI_Controller {
     //             'remarks' => $value->age,
     //             'mobile_number' => $value->mobile_number,
     //             'created_by' => 'mazores-Migrate',
-    //             'created_at' => $this->security->xss_clean(date('y-m-d H:i:s')),
+    //             'created_at' => $this->security->xss_clean(date('Y-m-d H:i:s')),
     //         );
 
     //         $victim_id = $this->M_victims->insert($victim_data);
@@ -871,7 +871,7 @@ class Complaint extends CI_Controller {
     //                 'report_id' => $report_id,
     //                 'first_name' => $value->suspect_name,
     //                 'created_by' => 'mazores-Migrate',
-    //                 'created_at' => $this->security->xss_clean(date('y-m-d H:i:s')),
+    //                 'created_at' => $this->security->xss_clean(date('Y-m-d H:i:s')),
     //             );
     
     //             $suspect_id = $this->M_suspects->insert($suspect_data);

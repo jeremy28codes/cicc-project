@@ -149,7 +149,7 @@
 
                                                         $dt_received        =    isset($value->date_received) && $value->date_received ? date('Y-m-d', strtotime($value->date_received)) : '';
                                                     ?>
-                                                    <?php if(!empty($report_categories)): ?>
+                                                    <?php if(empty($report_categories)): ?>
                                                         <tr>
                                                             <td class="text-center"></td>
                                                             <td class="text-center"><?= $value->id ?></td>

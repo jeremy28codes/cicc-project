@@ -49,7 +49,7 @@ class Victim_financial_transaction extends CI_Controller {
 
         $data = array(
             'deleted_by' => $this->security->xss_clean($this->session->userdata('username')),
-            'deleted_at' => $this->security->xss_clean(date('y-m-d H:i:s')),
+            'deleted_at' => $this->security->xss_clean(date('Y-m-d H:i:s')),
         );
 
         $id = $this->M_victim_financial_transactions->delete($id, $data);
