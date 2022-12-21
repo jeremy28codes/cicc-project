@@ -205,9 +205,8 @@
                                                                     <div class="invalid-feedback">This field is required!</div>
                                                                 </div>
                                                                 <div class="col-md-6 mb-2">
-                                                                    <label for="mobile_number" class="form-label">Mobile Number <code>*</code></label>
-                                                                    <input type="text" id="mobile_number" name="mobile_number" class="form-control form-control-sm" placeholder="Enter mobile number here" required> 
-                                                                    <div class="invalid-feedback">This field is required!</div>
+                                                                    <label for="mobile_number" class="form-label">Mobile Number</label>
+                                                                    <input type="text" id="mobile_number" name="mobile_number" class="form-control form-control-sm" placeholder="Enter mobile number here"> 
                                                                 </div>
                                                                 <div class="col-md-6 mb-2">
                                                                     <label for="email" class="form-label">Email <code>*</code></label>

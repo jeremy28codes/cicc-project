@@ -166,7 +166,7 @@ class Complaint extends CI_Controller {
             
             if($rgv_report_type_id!=="" && $date_received!=="" && $time_received!=="" && $officer_on_case!==""
                 && $description_of_incident!=="" && $actions_taken!=="" && $victim_first_name!=="" && $victim_last_name!==""
-                && $victim_email!=="" && $victim_mobile!=="")
+                && $victim_email!=="")
             {
 
                 $response['status'] = 1;

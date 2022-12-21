@@ -184,7 +184,6 @@
                                                             </td>
                                                         </tr>
                                                     <?php endif; ?>
-                                                    
                                                 <?php endforeach; ?>
                                             <?php endif; ?>
                                         </tbody>
